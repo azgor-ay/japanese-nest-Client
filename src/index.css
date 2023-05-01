@@ -8,3 +8,9 @@
 .default{
   @apply px-3 font-semibold
 }
+
+.banner{
+  background-image: url("./assets/banner-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
