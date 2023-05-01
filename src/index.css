@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active{
+  @apply px-3 font-semibold text-green-500
+}
+.default{
+  @apply px-3 font-semibold
+}
