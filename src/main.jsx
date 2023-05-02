@@ -1,16 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Home from "./Pages/UniquePages/Home";
 import Blog from "./Pages/UniquePages/Blog";
 import ContactUs from "./Pages/UniquePages/ContactUs";
-import Recipes from "./Pages/UniquePages/Recipes";
+import Recipes from "./components/Recipes";
 import homePageData from "./Loaders/HomePageData";
+import DetailsChef from "./Pages/UniquePages/DetailsChef";
 
 const router = createBrowserRouter([
   {
@@ -20,21 +18,25 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: homePageData
+        loader: homePageData,
       },
       {
         path: "/blog",
-        element: <Blog></Blog>
+        element: <Blog></Blog>,
       },
       {
         path: "/contact",
-        element: <ContactUs></ContactUs>
+        element: <ContactUs></ContactUs>,
       },
       {
-        path: "/recipes/:id",
-        element: <Recipes></Recipes> 
-      }
-    ]
+        path: "/chefDetails/:id",
+        element: <DetailsChef></DetailsChef>,
+        loader: ({ params }) =>
+          fetch(
+            `https://japanesenest-server-yeasin86.vercel.app/chefs/${params.id}`
+          ),
+      },
+    ],
   },
 ]);
 

@@ -39,7 +39,6 @@ const Home = () => {
   }, []);
 
   const [showAll, setShowAll] = useState(false);
-  console.log(showAll);
 
   return (
     <div>

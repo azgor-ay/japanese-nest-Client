@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ chef }) => {
   const {
+    id,
     picture,
     name,
     num_recipes,
@@ -12,7 +13,7 @@ const Card = ({ chef }) => {
   } = chef;
 
   return (
-    <div className="card w-72 bg-base-100 shadow-xl m-4">
+    <div className="card w-72 bg-base-100 shadow-xl m-4 bg-gray-900 bg-opacity-50">
       <figure>
         <img className="w-full" src={picture} />
       </figure>
@@ -34,9 +35,11 @@ const Card = ({ chef }) => {
           <div className="badge badge-outline">Likes {num_likes}</div>
         </div>
       </div>
-      <button className="w-full rounded-b-lg bg-green-500 text-black font-semibold py-2">
-        <Link>View Recipes</Link>
-      </button>
+      <Link to={`/chefDetails/${id}`}>
+        <button className="w-full rounded-b-lg bg-green-500 text-black font-semibold py-2">
+          View Recipes
+        </button>
+      </Link>
     </div>
   );
 };
