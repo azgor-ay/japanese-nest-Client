@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import img from "../../assets/chefBanner.png";
 import { useLoaderData } from "react-router-dom";
 import Card from "../../components/Card";
@@ -6,7 +6,16 @@ import CarouselBox from "../../components/CarouselBox";
 const Home = () => {
   const serverData = useLoaderData();
   const [chefs, setChefs] = useState([]);
+
   const [feedBacks, setFeedBacks] = useState([]);
+  const [fourFeedBack, setFourFeedBack] = useState([]);
+
+  const [showAll, setShowAll] = useState(false); 
+
+  useEffect(()=>{
+    setFourFeedBack(feedBacks.slice(0, 4));
+  },[feedBacks])
+
 
   serverData.chefsData
     .then((result) => {
@@ -82,12 +91,12 @@ const Home = () => {
         </div>
       </div>
       {/* Satisfied Customers */}
-      <h2>
-        Out Satisfied <span>Customers</span>
+      <h2 className="uppercase text-center text-4xl text-white font-bold py-5 mt-12">
+        Out Satisfied <span className="text-green-500">Customers</span>
       </h2>
 
-      <div className="grid grid-cols-4">
-        {feedBacks &&
+      <div className="grid grid-cols-4 gap-8 container mx-auto p-5">
+        {showAll ||
           feedBacks.map((feedBack) => (
             <CarouselBox
               key={feedBack.customer_id}
@@ -95,6 +104,7 @@ const Home = () => {
             ></CarouselBox>
           ))}
       </div>
+      <button onClick={()=> setShowAll(true)} className="">Show All Customers</button>
     </div>
   );
 };
