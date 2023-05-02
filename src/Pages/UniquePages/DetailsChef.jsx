@@ -32,16 +32,20 @@ const DetailsChef = () => {
             <span className="bg-clip-text text-5xl font-extrabold  drop-shadow-md text-transparent bg-gradient-to-r from-green-500 to-violet-900">
               {name}{" "}
             </span>
-            <p>Total {experience_year} years of cooking experience</p>
+            <div className="font-bold">
+            <p className="badge badge-success">Total {experience_year} years of cooking experience</p>
+            </div>
             <div>
               <h4 className="font-bold pt-4 text-xl drop-shadow">
                 Gained Awards
               </h4>
               {awards.map((a) => (
-                <p className="ms-6 font-semibold">
-                  {" "}
-                  <FaAward className="inline" /> {a}
-                </p>
+                <div>
+                  <p className="ms-6 font-semibold badge">
+                    {" "}
+                    <FaAward className="inline" /> {a}
+                  </p>
+                </div>
               ))}
             </div>
             <div className="py-5">
@@ -63,7 +67,9 @@ const DetailsChef = () => {
       </div>
 
       <div>
-        <h1 className="text-5xl text-white font-bold text-center mt-14">Best recipes of <span className="text-green-500">{name}</span></h1>
+        <h1 className="text-5xl py-6 text-white font-bold text-center mt-28">
+          Best recipes of <span className="text-green-500">{name}</span>
+        </h1>
         <Recipes></Recipes>
       </div>
     </div>

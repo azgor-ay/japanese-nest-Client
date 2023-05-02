@@ -14,9 +14,8 @@ const Recipes = () => {
 
   return (
     <div>
-      <h1>foods</h1>
       {recipes && (
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-2 gap-11">
           {
             recipes.map(recipe=> <SingleRecipe
             key={recipe.id}

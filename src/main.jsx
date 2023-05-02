@@ -9,16 +9,28 @@ import ContactUs from "./Pages/UniquePages/ContactUs";
 import Recipes from "./components/Recipes";
 import homePageData from "./Loaders/HomePageData";
 import DetailsChef from "./Pages/UniquePages/DetailsChef";
+import LoginPage from "./Pages/UniquePages/LoginPage";
+import RegisterPage from "./Pages/UniquePages/RegisterPage";
+import ErrorPage from "./Pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
         element: <Home></Home>,
         loader: homePageData,
+      },
+      {
+        path: "/login",
+        element: <LoginPage></LoginPage>
+      },
+      {
+        path: "/register",
+        element: <RegisterPage></RegisterPage>
       },
       {
         path: "/blog",

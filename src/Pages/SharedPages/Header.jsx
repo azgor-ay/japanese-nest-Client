@@ -4,13 +4,15 @@ import { Link, NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <div className="navbar bg-base-100 text-white container mx-auto justify-between">
-      <Link to="/">
+      <Link to="/" title="Redirect to Home">
         <div className="flex-col text-center">
-          <h1 className="text-3xl font-semibold -mb-1.5">
+          <h1 className="text-3xl font-bold -mb-1.5">
             <span className="text-green-500 drop-shadow-lg">Japanese</span>
             <span className="">Nest</span>
           </h1>
-          <p className="text-xs text-gray-500">Recipes to live longer</p>
+          <p className="text-xs text-gray-300 font-semibold">
+            Recipes to live longer
+          </p>
         </div>
       </Link>
       <div>
@@ -34,9 +36,11 @@ const Header = () => {
         </NavLink>
       </div>
       <div className="flex-none gap-2">
-        <button className="px-6 py-1.5 btn-primary font-semibold text-white rounded-2xl">
-          Login
-        </button>
+        <Link to="/login">
+          <button className="px-6 py-1.5 btn-primary font-semibold text-white rounded-2xl">
+            Login
+          </button>
+        </Link>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">

@@ -6,15 +6,15 @@ const Footer = () => {
   return (
     <div className="bg-black text-gray-300 p-12 grid grid-cols-6 text-xs mt-8">
       <div className="col-span-2 px-5">
-        <Link to="/">
+        <Link to="/" title="Redirect to Home">
           <div className="flex-col text-center">
-            <h1 className="text-3xl font-semibold -mb-1.5">
+            <h1 className="text-3xl font-bold -mb-1.5">
               <span className="text-gray-500 hover:text-green-500 drop-shadow-lg">
                 Japanese
               </span>
               <span className="">Nest</span>
             </h1>
-            <p className="text-xs text-gray-500 hover:text-green-500">
+            <p className="text-xs font-semibold text-gray-500 hover:text-green-500">
               Recipes to live longer
             </p>
           </div>

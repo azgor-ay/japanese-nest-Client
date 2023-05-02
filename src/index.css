@@ -19,6 +19,13 @@
 .overlapBannerImg{
   top: -848px; 
 }
+
+.show-hide-pass-btn{
+  position: relative;
+  right: -213px;
+  top: -47px;
+}
+
 .footer-sub-title {
   @apply font-bold mb-3
 }
