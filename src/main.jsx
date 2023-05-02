@@ -10,6 +10,7 @@ import Home from "./Pages/UniquePages/Home";
 import Blog from "./Pages/UniquePages/Blog";
 import ContactUs from "./Pages/UniquePages/ContactUs";
 import Recipes from "./Pages/UniquePages/Recipes";
+import homePageData from "./Loaders/HomePageData";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>
+        element: <Home></Home>,
+        loader: homePageData
       },
       {
         path: "/blog",

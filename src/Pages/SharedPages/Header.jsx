@@ -17,7 +17,7 @@ const Header = () => {
         <NavLink className={({isActive})=> isActive? "active" : "default"} to="/contact">Contact Us</NavLink>
       </div>
       <div className="flex-none gap-2">
-      <button class="px-6 py-1.5 btn-primary font-semibold text-white rounded-2xl">Login</button>
+      <button className="px-6 py-1.5 btn-primary font-semibold text-white rounded-2xl">Login</button>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
