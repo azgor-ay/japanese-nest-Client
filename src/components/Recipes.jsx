@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SingleRecipe from "./SingleRecipe";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -15,8 +16,13 @@ const Recipes = () => {
     <div>
       <h1>foods</h1>
       {recipes && (
-        <div>
-          <h1>recipe</h1>
+        <div className="grid grid-cols-4">
+          {
+            recipes.map(recipe=> <SingleRecipe
+            key={recipe.id}
+            recipe={recipe}
+            ></SingleRecipe>)
+          }
         </div>
       )}
     </div>

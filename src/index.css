@@ -2,23 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-.active{
+.active {
   @apply px-3 font-semibold text-green-500
 }
-.default{
+
+.default {
   @apply px-3 font-semibold
 }
 
-.banner{
+.banner {
   background-image: url("./assets/banner-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-.footer-sub-title{
-  @apply font-bold mb-3 
+.overlapBannerImg{
+  top: -848px; 
+}
+.footer-sub-title {
+  @apply font-bold mb-3
 }
 
-.footer-links{
+.footer-links {
   @apply mb-2 text-gray-500
 }

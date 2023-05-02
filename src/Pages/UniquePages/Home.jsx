@@ -3,7 +3,7 @@ import img from "../../assets/chefBanner.png";
 import { useLoaderData } from "react-router-dom";
 import Card from "../../components/Card";
 import CarouselBox from "../../components/CarouselBox";
-import { FaBeer, FaRocket } from 'react-icons/fa';
+import { FaRocket } from 'react-icons/fa';
 const Home = () => {
   const serverData = useLoaderData();
   const [chefs, setChefs] = useState([]);
