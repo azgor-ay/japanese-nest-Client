@@ -10,7 +10,6 @@ const Card = ({ chef }) => {
     experience_year,
     description,
   } = chef;
-  console.log(chef);
 
   return (
     <div className="card w-72 bg-base-100 shadow-xl m-4">

@@ -14,3 +14,11 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.footer-sub-title{
+  @apply font-bold mb-3 
+}
+
+.footer-links{
+  @apply mb-2 text-gray-500
+}

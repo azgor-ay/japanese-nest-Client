@@ -3,6 +3,7 @@ import img from "../../assets/chefBanner.png";
 import { useLoaderData } from "react-router-dom";
 import Card from "../../components/Card";
 import CarouselBox from "../../components/CarouselBox";
+import { FaBeer, FaRocket } from 'react-icons/fa';
 const Home = () => {
   const serverData = useLoaderData();
   const [chefs, setChefs] = useState([]);
@@ -10,30 +11,35 @@ const Home = () => {
   const [feedBacks, setFeedBacks] = useState([]);
   const [fourFeedBack, setFourFeedBack] = useState([]);
 
-  const [showAll, setShowAll] = useState(false); 
+  useEffect(() => {
+    const fourFeedBack = feedBacks.slice(0, 4);
+    setFourFeedBack(fourFeedBack);
+  }, [feedBacks]);
 
-  useEffect(()=>{
-    setFourFeedBack(feedBacks.slice(0, 4));
-  },[feedBacks])
+  useEffect(() => {
+    serverData.chefsData
+      .then((result) => {
+        const chefsData = result;
+        setChefs(chefsData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
+  useEffect(() => {
+    serverData.feedBacks
+      .then((result) => {
+        const customerFeedBacks = result;
+        setFeedBacks(customerFeedBacks);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  serverData.chefsData
-    .then((result) => {
-      const chefsData = result;
-      setChefs(chefsData);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
-  serverData.feedBacks
-    .then((result) => {
-      const customerFeedBacks = result;
-      setFeedBacks(customerFeedBacks);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const [showAll, setShowAll] = useState(false);
+  console.log(showAll);
 
   return (
     <div>
@@ -91,20 +97,50 @@ const Home = () => {
         </div>
       </div>
       {/* Satisfied Customers */}
-      <h2 className="uppercase text-center text-4xl text-white font-bold py-5 mt-12">
-        Out Satisfied <span className="text-green-500">Customers</span>
-      </h2>
+      <div className="container mx-auto">
+        <h2 className="uppercase text-center text-4xl text-white font-bold py-5 mt-12">
+          Out Satisfied <span className="text-green-500">Customers</span>
+        </h2>
 
-      <div className="grid grid-cols-4 gap-8 container mx-auto p-5">
-        {showAll ||
-          feedBacks.map((feedBack) => (
-            <CarouselBox
-              key={feedBack.customer_id}
-              feedBack={feedBack}
-            ></CarouselBox>
-          ))}
+        <div className="grid grid-cols-4 gap-8 p-5">
+          {showAll &&
+            feedBacks &&
+            feedBacks.map((feedBack) => (
+              <CarouselBox
+                key={feedBack.customer_id}
+                feedBack={feedBack}
+              ></CarouselBox>
+            ))}
+          {showAll ||
+            (fourFeedBack &&
+              fourFeedBack.map((feedBack) => (
+                <CarouselBox
+                  key={feedBack.customer_id}
+                  feedBack={feedBack}
+                ></CarouselBox>
+              )))}
+        </div>
+        {showAll || (
+          <button
+            onClick={() => setShowAll(true)}
+            className="btn btn-primary w-full"
+          >
+            Show All Customers
+          </button>
+        )}
       </div>
-      <button onClick={()=> setShowAll(true)} className="">Show All Customers</button>
+
+      {/* Newsletter */}
+      <div className="container mx-auto text-center p-12 bg-gray-600 my-6 bg-opacity-40 rounded-2xl">
+        <h4 className="text-green-500">SUBSCRIBE NOW!</h4>
+        <h2 className="text-3xl py-3 leading-normal font-semibold">
+          Secrets to Japanese Cooking <br /> 
+           Japanese cooking tips and weekly newsletter.
+        </h2>
+        <input className="px-4 py-2 bg-gray-300 w-2/4 text-black" placeholder="Enter Your Email Address" type="email" /> 
+        <button className="bg-white text-black hover:bg-green-500
+         px-8 py-2 ml-0">Subscribe <FaRocket className="inline text-green-500 hover:text-white"/></button>
+      </div>
     </div>
   );
 };
