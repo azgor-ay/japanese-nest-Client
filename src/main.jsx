@@ -12,6 +12,8 @@ import DetailsChef from "./Pages/UniquePages/DetailsChef";
 import LoginPage from "./Pages/UniquePages/LoginPage";
 import RegisterPage from "./Pages/UniquePages/RegisterPage";
 import ErrorPage from "./Pages/ErrorPage";
+import AuthProvider from "./providers/AuthProvider";
+import PrivateRoute from "./Pages/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -26,11 +28,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <LoginPage></LoginPage>
+        element: <LoginPage></LoginPage>,
       },
       {
         path: "/register",
-        element: <RegisterPage></RegisterPage>
+        element: <RegisterPage></RegisterPage>,
       },
       {
         path: "/blog",
@@ -42,7 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/chefDetails/:id",
-        element: <DetailsChef></DetailsChef>,
+        element: <PrivateRoute><DetailsChef></DetailsChef></PrivateRoute>,
         loader: ({ params }) =>
           fetch(
             `https://japanesenest-server-yeasin86.vercel.app/chefs/${params.id}`
@@ -54,6 +56,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

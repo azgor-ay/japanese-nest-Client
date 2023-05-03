@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Header = () => {
+  const { user, logOutUser } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOutUser()
+      .then()
+      .catch((error) => console.log(error.message));
+  };
+
   return (
     <div className="navbar bg-base-100 text-white container mx-auto justify-between">
       <Link to="/" title="Redirect to Home">
@@ -36,38 +44,43 @@ const Header = () => {
         </NavLink>
       </div>
       <div className="flex-none gap-2">
-        <Link to="/login">
-          <button className="px-6 py-1.5 btn-primary font-semibold text-white rounded-2xl">
-            Login
-          </button>
-        </Link>
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="https://i.ibb.co/fdwyBxN/User.png" />
-            </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div>
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img
+                  title={user.displayName ? user.displayName : "Anonymous User"}
+                  src={user ? user.photoURL : "https://i.ibb.co/fdwyBxN/User.png"}
+                />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </a>
+              </li>
+              <li>
+                <a>Settings</a>
+              </li>
+              <li onClick={handleLogOut}>
+                <a>Logout</a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link to="/login">
+            <button className="px-6 py-1.5 btn-primary font-semibold text-white rounded-2xl">
+              Login
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
 };
-
 export default Header;

@@ -22,7 +22,7 @@
 
 .show-hide-pass-btn{
   position: relative;
-  right: -213px;
+  right: -240px;
   top: -47px;
 }
 
@@ -32,4 +32,8 @@
 
 .footer-links {
   @apply mb-2 text-gray-500
+}
+
+.errorPageTexts{
+  margin-top: -560px;
 }
