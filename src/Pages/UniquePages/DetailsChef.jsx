@@ -52,7 +52,7 @@ const DetailsChef = () => {
                 </div>
               ))}
             </div>
-            <div className="py-5">
+            <div className="py-1">
               <div className="badge badge-secondary">
                 <p>Signature Dish: {signature_dish}</p>
               </div>

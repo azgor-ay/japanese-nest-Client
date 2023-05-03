@@ -44,12 +44,12 @@ const Home = () => {
     <div>
       {/* The Homepage Banner  */}
       <div className="banner">
-        <div className="text-white grid grid-cols-2 bg-black bg-opacity-70">
-          <div className=" px-12 pt-16">
-            <h1 className="text-2xl leading-relaxed uppercase px-6 text-center font-bold mb-3">
+        <div className="text-white grid md:grid-cols-2 bg-black bg-opacity-70">
+          <div className=" p-2 md:px-12 pt-5 md:pt-16">
+            <h1 className="md:text-2xl leading-relaxed uppercase px-6 text-center font-bold md:mb-3">
               Why to choose japanese food recipes from us?
             </h1>
-            <div className="px-5 text-gray-200 text-xs drop">
+            <div className="p-2 md:px-5 text-gray-200 text-xs drop">
               <p className="py-1 drop-shadow">
                 "Japanese Nest" is a brand that offers healthy Japanese food
                 recipes to help people keep themselves fit and active. The
@@ -65,7 +65,7 @@ const Home = () => {
                 providing recipes that feature a wide variety of vegetables,
                 fruits, seafood, and lean proteins.
               </p>
-              <p className="py-1 drop-shadow">
+              <p className="py-1 drop-shadow hidden md:block">
                 In addition to providing recipes, Japanese Nest may also offer
                 educational resources on the health benefits of Japanese
                 cuisine, including its emphasis on whole foods, balanced
@@ -73,35 +73,38 @@ const Home = () => {
                 understand the rationale behind the recipes and motivate them to
                 adopt healthier habits in their daily lives.
               </p>
-              <p className="py-1 drop-shadow">
+              <p className="py-1 drop-shadow hidden md:block">
                 By providing high-quality, healthy Japanese food recipes,
                 Japanese Nest aims to empower people to take control of their
                 health and wellbeing, one meal at a time.
               </p>{" "}
             </div>
           </div>
-          <div className="mx-auto pt-5 opacity-90 drop-shadow-2xl">
+          <div className="mx-auto pt-5 opacity-90 drop-shadow-2xl hidden md:block">
             <img className="w-72" src={img} alt="" />
           </div>
         </div>
       </div>
+
+
       {/* Our Specialized Chefs */}
       <div>
-        <h2 className="uppercase text-center text-4xl text-green-500 font-bold py-5 mt-12">
+        <h2 className="uppercase text-center text-2xl md:text-4xl text-green-500 font-bold md:py-5 mt-4 md:mt-12">
           Our Specialized <span className="text-white">Chefs</span>
         </h2>
-        <div className="grid grid-cols-3 container mx-auto">
+        <div className="grid md:grid-cols-3 container mx-auto">
           {chefs &&
             chefs.map((chef) => <Card key={chef.id} chef={chef}></Card>)}
         </div>
       </div>
+
       {/* Satisfied Customers */}
       <div className="container mx-auto">
-        <h2 className="uppercase text-center text-4xl text-white font-bold py-5 mt-12">
+        <h2 className="uppercase text-center text-3xl leading-normal md:text-4xl text-white font-bold py-5 mt-12">
           Out Satisfied <span className="text-green-500">Customers</span>
         </h2>
 
-        <div className="grid grid-cols-4 gap-8 p-5">
+        <div className="grid md:grid-cols-4 gap-8 p-5">
           {showAll &&
             feedBacks &&
             feedBacks.map((feedBack) => (
@@ -130,14 +133,16 @@ const Home = () => {
       </div>
 
       {/* Newsletter */}
-      <div className="container mx-auto text-center p-12 bg-gray-600 my-6 bg-opacity-40 rounded-2xl">
-        <h4 className="text-green-500">SUBSCRIBE NOW!</h4>
-        <h2 className="text-3xl py-3 leading-normal font-semibold">
+      <div className="container mx-auto text-center p-5 md:p-12 bg-gray-600 my-6 bg-opacity-40 md:rounded-2xl">
+        <h4 className="text-green-500 font-bold md:font-normal">SUBSCRIBE NOW!</h4>
+        <h2 className="text-xs md:text-3xl py-3 leading-normal font-semibold">
           Secrets to Japanese Cooking <br /> 
            Japanese cooking tips and weekly newsletter.
         </h2>
-        <input className="px-4 py-2 bg-gray-300 w-2/4 text-black" placeholder="Enter Your Email Address" type="email" /> 
-        <button className="bg-white text-black hover:bg-green-500
+        <input className="px-4 py-2 bg-gray-300 w-full md:w-2/4 text-black rounded-t-lg md:rounded-none" 
+        placeholder="Enter Your Email Address" type="email" /> 
+
+        <button className="bg-white text-black w-full md:w-1/6 rounded-b-lg md:rounded-none hover:bg-green-500
          px-8 py-2 ml-0">Subscribe <FaRocket className="inline text-green-500 hover:text-white"/></button>
       </div>
     </div>

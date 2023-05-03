@@ -10,6 +10,16 @@
   @apply px-3 font-semibold
 }
 
+.mb-active {
+  @apply text-black my-1 text-xs bg-white text-center py-1 px-3 rounded-2xl font-semibold
+}
+
+.mb-default {
+  @apply text-gray-500 my-1 text-xs bg-white text-center py-1 px-3 rounded-2xl font-semibold
+}
+
+
+
 .banner {
   background-image: url("./assets/banner-bg.jpg");
   background-size: cover;

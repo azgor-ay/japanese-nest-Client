@@ -5,7 +5,7 @@ import "@smastrom/react-rating/style.css";
 const CarouselBox = ({ feedBack }) => {
   const { photo, name, feedback, ratings } = feedBack;
   return (
-    <div className="w-56 bg-gray-600 bg-opacity-40 flex flex-col rounded-lg">
+    <div className="md:w-56 bg-gray-600 bg-opacity-40 flex flex-col rounded-lg">
       <img className="w-full rounded-t-lg" src={photo} alt="customers" />
       <div className="px-6">
         <p className="text-2xl font-semibold text-center py-2 text-white">
