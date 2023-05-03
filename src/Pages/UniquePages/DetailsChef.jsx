@@ -8,6 +8,8 @@ const DetailsChef = () => {
   console.log(data);
   const {
     awards,
+    num_recipes,
+    num_likes,
     description,
     experience_year,
     name,
@@ -28,12 +30,14 @@ const DetailsChef = () => {
               alt=""
             />
           </div>
-          <div class="border ms-4">
+          <div class="ms-4">
             <span className="bg-clip-text text-5xl font-extrabold  drop-shadow-md text-transparent bg-gradient-to-r from-green-500 to-violet-900">
               {name}{" "}
             </span>
             <div className="font-bold">
-            <p className="badge badge-success">Total {experience_year} years of cooking experience</p>
+              <p className="badge badge-success">
+                Total {experience_year} years of cooking experience
+              </p>
             </div>
             <div>
               <h4 className="font-bold pt-4 text-xl drop-shadow">
@@ -54,6 +58,14 @@ const DetailsChef = () => {
               </div>
               <div className="badge badge-secondary ms-8">
                 <p>Specialty on: {specialty}</p>
+              </div>
+            </div>
+            <div className="pb-5">
+              <div className="badge badge-secondary">
+                <p>Number of Recipes: {num_recipes}</p>
+              </div>
+              <div className="badge badge-secondary ms-8">
+                <p>Total Likes: {num_likes}</p>
               </div>
             </div>
           </div>

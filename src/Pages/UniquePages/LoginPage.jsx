@@ -5,12 +5,15 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const LoginPage = () => {
   const [showPass, setShowPass] = useState(false);
+  const [noAccountMsg, setNoAccountMsg] = useState("");
+  const [wrongPassMsg, setWrongPassMsg] = useState("");
+
   const { signInWithGoogle, signInWithGithub, signInWithEmail } =
     useContext(AuthContext);
 
   const navigate = useNavigate();
-  const location = useLocation()
-  const from = location?.state?.from?.pathname || "/"
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
   console.log(location);
 
   const handleGoogleLogin = () => {
@@ -39,11 +42,13 @@ const LoginPage = () => {
 
   const handleUserLoginWithEmail = (event) => {
     event.preventDefault();
+
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-
+    setNoAccountMsg('')
+    setWrongPassMsg('')
     signInWithEmail(email, password)
       .then((result) => {
         const user = result.user;
@@ -52,6 +57,12 @@ const LoginPage = () => {
       })
       .catch((error) => {
         console.log(error.message);
+        if (error.message == "Firebase: Error (auth/user-not-found).") {
+          setNoAccountMsg("Looks like you don't have an account");
+        }
+        if (error.message == "Firebase: Error (auth/wrong-password).") {
+          setWrongPassMsg("wrong password");
+        }
       });
   };
 
@@ -80,6 +91,11 @@ const LoginPage = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
+                {wrongPassMsg.length > 0 && (
+                  <p className="text-center -mt-5 text-xs p-1 text-red-500 font-semibold">
+                    {wrongPassMsg}
+                  </p>
+                )}
                 <input
                   type={showPass ? "text" : "password"}
                   name="password"
@@ -115,7 +131,10 @@ const LoginPage = () => {
                 </button>
               </div>
             </form>
-            <div className="py-4">
+            <div className="py-4 text-center">
+              {noAccountMsg.length > 0 && (
+                <p className="badge badge-warning text-xs">{noAccountMsg}</p>
+              )}
               <p>
                 Don't have an account?{" "}
                 <Link to="/register" className="link">

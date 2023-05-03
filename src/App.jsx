@@ -9,8 +9,7 @@ const App = () => {
     <div>
       <Header></Header>
       <div>
-      {navigation.state === "loading" &&  <div className="bg-black text-white
-      ">"Ohon Loading Oitase"</div> }
+      {navigation.state === "loading" &&  <div className=" bg-black radial-progress text-primary" style={{"--value":70}}>70%</div> }
       </div>
       <Outlet></Outlet>
       <Footer></Footer>

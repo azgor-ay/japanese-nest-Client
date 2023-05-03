@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 const Header = () => {
   const { user, logOutUser } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleLogOut = () => {
     logOutUser()
-      .then(result =>{
-        navigate('/')
+      .then((result) => {
+        navigate("/");
       })
       .catch((error) => console.log(error.message));
   };
@@ -51,10 +53,21 @@ const Header = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img
-                  title={user.displayName ? user.displayName : "Anonymous User"}
-                  src={user.photoURL ? user.photoURL : "https://i.ibb.co/fdwyBxN/User.png"}
-                />
+                <a
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content={
+                    user.displayName ? user.displayName : "Anonymous User"
+                  }
+                >
+                  <img
+                    src={
+                      user.photoURL
+                        ? user.photoURL
+                        : "https://i.ibb.co/fdwyBxN/User.png"
+                    }
+                  />
+                </a>
+                <Tooltip id="my-tooltip" />
               </div>
             </label>
             <ul

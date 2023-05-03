@@ -1,13 +1,16 @@
 import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const RegisterPage = () => {
   const [showPass, setShowPass] = useState(false);
   const [showConfPass, setShowConfPass] = useState(false);
   const [error, setError] = useState("");
+  const [userHaveAccount, setUserHaveAccount] = useState(false);
 
+  const navigate = useNavigate();
   const { signInWithGoogle, signInWithGithub, createUserWithEmail } =
     useContext(AuthContext);
 
@@ -35,24 +38,37 @@ const RegisterPage = () => {
 
   const handleCreateNewUserWithEmail = (event) => {
     event.preventDefault();
+    setError("");
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     const confirmPass = form.confirmPassword.value;
     console.log(email, password, confirmPass);
 
-    if(password !== confirmPass){
-      setError("Password didn't match")
-      return
+    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+      setError(
+        "Your password should have Minimum eight characters, at least one letter and one number"
+      );
+      return;
     }
+
+    if (password !== confirmPass) {
+      setError("Password didn't match");
+      return;
+    }
+
     createUserWithEmail(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
-
+        Swal.fire("Congrats! HEALTH FREAK you registered successfully");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.message);
+        if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+          setUserHaveAccount(true);
+        }
       });
   };
 
@@ -156,7 +172,11 @@ const RegisterPage = () => {
                 </div>
               </div>
               <div className="text-center font-semibold">
-                {error.length>1 && <p className="badge badge-error">{error}</p>}
+                {error.length > 0 && (
+                  <p className="bg-red-600 text-xs p-2 text-white rounded-3xl w-56">
+                    {error}
+                  </p>
+                )}
               </div>
               <div className="form-control mt-2">
                 <button type="submit" className="btn btn-primary">
@@ -164,8 +184,10 @@ const RegisterPage = () => {
                 </button>
               </div>
             </form>
-
-            <div className="py-4">
+            <div className="pt-4">
+              {userHaveAccount && <p className="badge badge-warning text-xs">Looks like you already have an account</p>}
+            </div>
+            <div className="text-center">
               <p>
                 Already have an account?{" "}
                 <Link to="/login" className="link">
