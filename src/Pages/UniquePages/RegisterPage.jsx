@@ -6,6 +6,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 const RegisterPage = () => {
   const [showPass, setShowPass] = useState(false);
   const [showConfPass, setShowConfPass] = useState(false);
+  const [error, setError] = useState("");
 
   const { signInWithGoogle, signInWithGithub, createUserWithEmail } =
     useContext(AuthContext);
@@ -40,10 +41,15 @@ const RegisterPage = () => {
     const confirmPass = form.confirmPassword.value;
     console.log(email, password, confirmPass);
 
+    if(password !== confirmPass){
+      setError("Password didn't match")
+      return
+    }
     createUserWithEmail(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+
       })
       .catch((error) => {
         console.log(error.message);
@@ -111,9 +117,13 @@ const RegisterPage = () => {
                   className="show-hide-pass-btn"
                 >
                   {showPass ? (
-                    <FaEye className="inline " />
+                    <div className="eye-slashEye-hover">
+                      <FaEye className="inline " />
+                    </div>
                   ) : (
-                    <FaEyeSlash className="inline" />
+                    <div className="eye-slashEye-hover">
+                      <FaEyeSlash className="inline" />
+                    </div>
                   )}
                 </div>
               </div>
@@ -135,18 +145,26 @@ const RegisterPage = () => {
                   className="show-hide-pass-btn"
                 >
                   {showConfPass ? (
-                    <FaEye className="inline " />
+                    <div className="eye-slashEye-hover">
+                      <FaEye className="inline " />
+                    </div>
                   ) : (
-                    <FaEyeSlash className="inline" />
+                    <div className="eye-slashEye-hover">
+                      <FaEyeSlash className="inline" />
+                    </div>
                   )}
                 </div>
               </div>
-              <div className="form-control mt-6">
+              <div className="text-center font-semibold">
+                {error.length>1 && <p className="badge badge-error">{error}</p>}
+              </div>
+              <div className="form-control mt-2">
                 <button type="submit" className="btn btn-primary">
                   Register
                 </button>
               </div>
             </form>
+
             <div className="py-4">
               <p>
                 Already have an account?{" "}

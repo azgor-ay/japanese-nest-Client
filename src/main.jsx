@@ -14,6 +14,7 @@ import RegisterPage from "./Pages/UniquePages/RegisterPage";
 import ErrorPage from "./Pages/ErrorPage";
 import AuthProvider from "./providers/AuthProvider";
 import PrivateRoute from "./Pages/PrivateRoute";
+import UserProfile from "./Pages/UniquePages/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage></RegisterPage>,
+      },
+      {
+        path: "/usersProfile",
+        element: <UserProfile></UserProfile>
       },
       {
         path: "/blog",

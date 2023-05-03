@@ -94,9 +94,13 @@ const LoginPage = () => {
                   className="show-hide-pass-btn"
                 >
                   {showPass ? (
-                    <FaEye className="inline " />
+                    <div className="eye-slashEye-hover">
+                      <FaEye className="inline " />
+                    </div>
                   ) : (
-                    <FaEyeSlash className="inline" />
+                    <div className="eye-slashEye-hover">
+                      <FaEyeSlash className="inline" />
+                    </div>
                   )}
                 </div>
                 <label className="label">

@@ -26,6 +26,10 @@
   top: -47px;
 }
 
+.eye-slashEye-hover{
+  @apply hover:bg-gray-300 hover:bg-opacity-20 duration-500 cursor-pointer w-7 h-7 text-center rounded-full
+}
+
 .footer-sub-title {
   @apply font-bold mb-3
 }

@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Header = () => {
   const { user, logOutUser } = useContext(AuthContext);
+  const navigate = useNavigate()
   const handleLogOut = () => {
     logOutUser()
-      .then()
+      .then(result =>{
+        navigate('/')
+      })
       .catch((error) => console.log(error.message));
   };
 
@@ -50,7 +53,7 @@ const Header = () => {
               <div className="w-10 rounded-full">
                 <img
                   title={user.displayName ? user.displayName : "Anonymous User"}
-                  src={user ? user.photoURL : "https://i.ibb.co/fdwyBxN/User.png"}
+                  src={user.photoURL ? user.photoURL : "https://i.ibb.co/fdwyBxN/User.png"}
                 />
               </div>
             </label>
@@ -59,13 +62,10 @@ const Header = () => {
               className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="justify-between">
+                <Link to="/usersProfile" className="justify-between">
                   Profile
                   <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
+                </Link>
               </li>
               <li onClick={handleLogOut}>
                 <a>Logout</a>
