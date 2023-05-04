@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.tagline{
+  font-size: 12px;
+}
+
 .active {
   @apply px-3 font-semibold text-green-500
 }
@@ -18,8 +22,11 @@
   @apply text-gray-500 my-1 text-xs bg-white text-center py-1 px-3 rounded-2xl font-semibold
 }
 
-
-
+.home-banner{
+   background-image: url("./assets/HomeBannerBG.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .banner {
   background-image: url("./assets/banner-bg.jpg");
   background-size: cover;
@@ -50,4 +57,13 @@
 
 .errorPageTexts{
   margin-top: -560px;
+}
+
+.LazyLoad {
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.is-visible {
+  opacity: 1;
 }

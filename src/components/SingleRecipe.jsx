@@ -3,6 +3,7 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { FaHeart } from "react-icons/fa";
 import Swal from "sweetalert2";
+import LazyLoad from "react-lazy-load";
 
 const SingleRecipe = ({ recipe }) => {
   const { photo, name, ingredients, method, rating } = recipe;
@@ -15,7 +16,9 @@ const SingleRecipe = ({ recipe }) => {
 
   return (
     <div className="w-full bg-gray-600 bg-opacity-40 flex flex-col rounded-lg">
-      <img className="w-full rounded-t-lg" src={photo} alt="customers" />
+      <LazyLoad>
+        <img className="w-full rounded-t-lg" src={photo} alt="customers" />
+      </LazyLoad>
       <button
         onClick={handleLove}
         disabled={liked}

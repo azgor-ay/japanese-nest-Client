@@ -4,13 +4,23 @@ import { Outlet, useNavigation } from "react-router-dom";
 import Footer from "./Pages/SharedPages/Footer";
 
 const App = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+  if (navigation.state == "loading") {
+    return (
+      <div className="text-center">
+        <div
+          className="bg-black radial-progress text-primary mx-auto"
+          style={{ "--value": 70 }}
+        >
+          Loading
+        </div>
+      </div>
+    );
+  }
+  console.log(navigation);
   return (
     <div>
       <Header></Header>
-      <div>
-      {navigation.state === "loading" &&  <div className=" bg-black radial-progress text-primary" style={{"--value":70}}>70%</div> }
-      </div>
       <Outlet></Outlet>
       <Footer></Footer>
     </div>

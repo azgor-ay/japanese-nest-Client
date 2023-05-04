@@ -15,6 +15,7 @@ import ErrorPage from "./Pages/ErrorPage";
 import AuthProvider from "./providers/AuthProvider";
 import PrivateRoute from "./Pages/PrivateRoute";
 import UserProfile from "./Pages/UniquePages/UserProfile";
+import AboutUs from "./Pages/UniquePages/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactUs></ContactUs>,
+      },
+      {
+        path: "/about",
+        element: <AboutUs></AboutUs>
       },
       {
         path: "/chefDetails/:id",

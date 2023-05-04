@@ -2,6 +2,7 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 import Recipes from "../../components/Recipes";
 import { FaAward, FaRocket } from "react-icons/fa";
+import LazyLoad from "react-lazy-load";
 
 const DetailsChef = () => {
   const data = useLoaderData();
@@ -24,14 +25,18 @@ const DetailsChef = () => {
       <div className="grid grid-cols-3">
         <div className="p-5 col-span-2 text-black">
           <div className="h-48">
-            <img
+           <LazyLoad>
+             <img
               className="w-full overflow-hidden rounded-lg"
               src={picture}
               alt=""
             />
+           </LazyLoad>
+           
           </div>
           <div class="ms-4">
-            <span className="bg-clip-text text-5xl font-extrabold  drop-shadow-md text-transparent bg-gradient-to-r from-green-500 to-violet-900">
+            <span 
+            className="bg-clip-text text-5xl font-extrabold drop-shadow-md text-transparent bg-gradient-to-r from-green-500 to-violet-900">
               {name}{" "}
             </span>
             <div className="font-bold">

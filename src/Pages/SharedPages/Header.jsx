@@ -17,16 +17,16 @@ const Header = () => {
       })
       .catch((error) => console.log(error.message));
   };
- 
+
   return (
     <div className="flex items-center bg-base-100 text-white md:container mx-auto justify-between">
       <Link to="/" title="Redirect to Home">
         <div className="flex-col text-center ms-2 md:ms-0">
-          <h1 className="text-3xl font-bold -mb-1.5">
+          <h1 className="text-2xl md:text-3xl font-bold -mb-1.5">
             <span className="text-green-500 drop-shadow-lg">Japanese</span>
             <span className="">Nest</span>
           </h1>
-          <p className="text-xs text-gray-300 font-semibold">
+          <p className="tagline md:text-xs text-gray-300 font-semibold">
             Recipes to live longer
           </p>
         </div>
@@ -47,14 +47,21 @@ const Header = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? "active" : "default")}
+          to="/about"
+        >
+          About Us
+        </NavLink>
+
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : "default")}
           to="/contact"
         >
           Contact Us
         </NavLink>
       </nav>
 
-      {/* Mobile device Navbar  */}
-      <div className="md:hidden absolute top-2 -right-16 z-50">
+      {/* Mobile device Navbar */}
+      <div className="md:hidden absolute top-2 right-0 left-72 z-50">
         <div
           className="w-4"
           onClick={() => {
@@ -70,9 +77,54 @@ const Header = () => {
         <nav
           className={`flex flex-col text-left bg-green-500 rounded-2xl
           ${
-            toggleNav ? "top-1" : "-top-48"
-          } right-24 duration-700 relative p-3`}
+            toggleNav ? "top-1" : "-top-72"
+          } right-24 w-32 duration-700 relative p-3`}
         >
+          <div className="flex-none gap-2 mx-auto">
+            {user ? (
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <a
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content={
+                        user.displayName ? user.displayName : "Anonymous User"
+                      }
+                    >
+                      <img
+                        src={
+                          user.photoURL
+                            ? user.photoURL
+                            : "https://i.ibb.co/fdwyBxN/User.png"
+                        }
+                      />
+                    </a>
+                    <Tooltip id="my-tooltip" />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link to="/usersProfile" className="justify-between">
+                      Profile
+                      <span className="badge">New</span>
+                    </Link>
+                  </li>
+                  <li onClick={handleLogOut}>
+                    <a>Logout</a>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/login" className="hidden md:inline">
+                <button className="px-6 py-1.5 btn-primary font-semibold text-white rounded-2xl">
+                  Login
+                </button>
+              </Link>
+            )}
+          </div>
           <NavLink
             onClick={() => {
               setToggleNav(!toggleNav);
@@ -95,6 +147,19 @@ const Header = () => {
           >
             Blog
           </NavLink>
+
+          <NavLink
+            onClick={() => {
+              setToggleNav(!toggleNav);
+            }}
+            className={({ isActive }) =>
+              isActive ? "mb-active" : "mb-default"
+            }
+            to="/about"
+          >
+            About Us
+          </NavLink>
+
           <NavLink
             onClick={() => {
               setToggleNav(!toggleNav);
@@ -119,13 +184,13 @@ const Header = () => {
         </nav>
       </div>
 
-      <div className="flex-none gap-2">
+      <div className="flex-none gap-2 hidden md:block">
         {user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <a
-                  data-tooltip-id="my-tooltip"
+                  data-tooltip-id="user-name"
                   data-tooltip-content={
                     user.displayName ? user.displayName : "Anonymous User"
                   }
@@ -138,7 +203,7 @@ const Header = () => {
                     }
                   />
                 </a>
-                <Tooltip id="my-tooltip" />
+                <Tooltip id="user-name" />
               </div>
             </label>
             <ul
