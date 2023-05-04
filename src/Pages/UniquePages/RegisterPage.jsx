@@ -18,7 +18,6 @@ const RegisterPage = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        console.log(user);
       })
       .catch((error) => {
         console.log(error.message);
@@ -29,7 +28,6 @@ const RegisterPage = () => {
     signInWithGithub()
       .then((result) => {
         const user = result.user;
-        console.log(user);
       })
       .catch((error) => {
         console.log(error.message);
@@ -43,7 +41,6 @@ const RegisterPage = () => {
     const email = form.email.value;
     const password = form.password.value;
     const confirmPass = form.confirmPassword.value;
-    console.log(email, password, confirmPass);
 
     if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
       setError(
@@ -60,7 +57,6 @@ const RegisterPage = () => {
     createUserWithEmail(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         Swal.fire("Congrats! HEALTH FREAK you registered successfully");
         navigate("/");
       })
@@ -134,11 +130,11 @@ const RegisterPage = () => {
                 >
                   {showPass ? (
                     <div className="eye-slashEye-hover">
-                      <FaEye className="inline " />
+                      <FaEyeSlash className="inline" />
                     </div>
                   ) : (
                     <div className="eye-slashEye-hover">
-                      <FaEyeSlash className="inline" />
+                      <FaEye className="inline " />
                     </div>
                   )}
                 </div>
@@ -162,11 +158,11 @@ const RegisterPage = () => {
                 >
                   {showConfPass ? (
                     <div className="eye-slashEye-hover">
-                      <FaEye className="inline " />
+                      <FaEyeSlash className="inline" />
                     </div>
                   ) : (
                     <div className="eye-slashEye-hover">
-                      <FaEyeSlash className="inline" />
+                      <FaEye className="inline " />
                     </div>
                   )}
                 </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import img from "../assets/ourMissionImg.png";
+import LazyLoad from "react-lazy-load";
 
 const OurMission = () => {
   return (
@@ -9,7 +10,9 @@ const OurMission = () => {
       </h1>
       <div className="grid md:grid-cols-2 mx-auto">
         <div className="mx-auto">
-          <img src={img} alt="" className="w-full md:px-10" />
+          <LazyLoad>
+            <img src={img} alt="" className="w-full md:px-10" />
+          </LazyLoad>
         </div>
         <div className="md:pt-12 text-center md:w-full w-72 md:pr-16 mx-auto md:mx-0 md:text-left">
           <p className="py-3 text-xs leading-relaxed">
@@ -42,4 +45,4 @@ const OurMission = () => {
   );
 };
 
-export default OurMission; 
+export default OurMission;

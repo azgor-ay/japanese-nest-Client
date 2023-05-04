@@ -17,7 +17,6 @@ const App = () => {
       </div>
     );
   }
-  console.log(navigation);
   return (
     <div>
       <Header></Header>

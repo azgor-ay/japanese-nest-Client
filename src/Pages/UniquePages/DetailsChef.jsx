@@ -1,12 +1,11 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import Recipes from "../../components/Recipes";
-import { FaAward, FaRocket } from "react-icons/fa";
+import { FaAward } from "react-icons/fa";
 import LazyLoad from "react-lazy-load";
 
 const DetailsChef = () => {
   const data = useLoaderData();
-  console.log(data);
   const {
     awards,
     num_recipes,
@@ -22,17 +21,16 @@ const DetailsChef = () => {
   return (
     <div className="container mx-auto">
       {/* Single Chef Banner */}
-      <div className="grid grid-cols-3">
-        <div className="p-5 col-span-2 text-black">
+      <div className="grid md:grid-cols-3">
+        <div className="p-5 md:col-span-2 text-white md:text-black">
           <div className="h-48">
-           <LazyLoad>
-             <img
-              className="w-full overflow-hidden rounded-lg"
-              src={picture}
-              alt=""
-            />
-           </LazyLoad>
-           
+            <LazyLoad>
+              <img
+                className="w-full overflow-hidden rounded-lg"
+                src={picture}
+                alt=""
+              />
+            </LazyLoad>
           </div>
           <div class="ms-4">
             <span 
@@ -61,7 +59,7 @@ const DetailsChef = () => {
               <div className="badge badge-secondary">
                 <p>Signature Dish: {signature_dish}</p>
               </div>
-              <div className="badge badge-secondary ms-8">
+              <div className="badge badge-secondary md:ms-8">
                 <p>Specialty on: {specialty}</p>
               </div>
             </div>
@@ -69,7 +67,7 @@ const DetailsChef = () => {
               <div className="badge badge-secondary">
                 <p>Number of Recipes: {num_recipes}</p>
               </div>
-              <div className="badge badge-secondary ms-8">
+              <div className="badge badge-secondary md:ms-8">
                 <p>Total Likes: {num_likes}</p>
               </div>
             </div>
@@ -79,12 +77,12 @@ const DetailsChef = () => {
           <h1 className="text-center font-bold py-5 mt-12 text-3xl text-white">
             Words that describe {name} the best{" "}
           </h1>
-          <p className="leading-relaxed text-gray-400">{description}</p>
+          <p className="leading-relaxed text-gray-400 px-8 md:px-0">{description}</p>
         </div>
       </div>
 
       <div>
-        <h1 className="text-5xl py-6 text-white font-bold text-center mt-28">
+        <h1 className="text-2xl md:text-5xl py-6 text-white font-bold text-center md:mt-28">
           Best recipes of <span className="text-green-500">{name}</span>
         </h1>
         <Recipes></Recipes>

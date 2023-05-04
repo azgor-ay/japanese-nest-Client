@@ -2,25 +2,27 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useRef } from "react";
 
 const LoginPage = () => {
   const [showPass, setShowPass] = useState(false);
   const [noAccountMsg, setNoAccountMsg] = useState("");
   const [wrongPassMsg, setWrongPassMsg] = useState("");
+  const emailRef = useRef();
+  const passRef = useRef(); 
 
-  const { signInWithGoogle, signInWithGithub, signInWithEmail } =
+  const { signInWithGoogle, signInWithGithub, signInWithEmail, resetPassword } =
     useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
-  console.log(location);
 
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        console.log(user);
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -32,7 +34,6 @@ const LoginPage = () => {
     signInWithGithub()
       .then((result) => {
         const user = result.user;
-        console.log(user);
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -46,13 +47,11 @@ const LoginPage = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
-    setNoAccountMsg('')
-    setWrongPassMsg('')
+    setNoAccountMsg("");
+    setWrongPassMsg("");
     signInWithEmail(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -66,6 +65,25 @@ const LoginPage = () => {
       });
   };
 
+  const handleResetPassword = () => {
+    const email = emailRef.current.value; 
+    const password = passRef.current.value;
+
+    console.log(email, password);
+    resetPassword(email)
+      .then((result) => {
+        Swal.fire("Password reset email has been send to your inbox")
+        setWrongPassMsg("")
+        emailRef.current.value = "";
+        passRef.current.value = "";
+        // if(result.user){return}; 
+      })
+      .catch((error) => {
+        if(error.message = "Firebase: Error (auth/missing-email)."){
+          setWrongPassMsg("Empty email field")
+        }
+        console.log(error.message)});
+  };
   return (
     <div className="hero min-h-screen  bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -79,7 +97,8 @@ const LoginPage = () => {
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input
+                <input ref={(emailRef)}
+                  id="email"
                   type="email"
                   name="email"
                   required
@@ -96,7 +115,8 @@ const LoginPage = () => {
                     {wrongPassMsg}
                   </p>
                 )}
-                <input
+                <input ref={passRef}
+                  id="password"
                   type={showPass ? "text" : "password"}
                   name="password"
                   required
@@ -111,16 +131,19 @@ const LoginPage = () => {
                 >
                   {showPass ? (
                     <div className="eye-slashEye-hover">
-                      <FaEye className="inline " />
+                      <FaEyeSlash className="inline" />
                     </div>
                   ) : (
                     <div className="eye-slashEye-hover">
-                      <FaEyeSlash className="inline" />
+                      <FaEye className="inline " />
                     </div>
                   )}
                 </div>
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <a
+                    onClick={handleResetPassword}
+                    className="label-text-alt link link-hover"
+                  >
                     Forgot password?
                   </a>
                 </label>

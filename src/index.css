@@ -67,3 +67,7 @@
 .is-visible {
   opacity: 1;
 }
+
+code{
+  @apply italic font-bold
+}

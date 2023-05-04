@@ -10,12 +10,10 @@ const Recipes = () => {
       .then((data) => setRecipes(data));
   }, []);
 
-  console.log(recipes);
-
   return (
     <div>
       {recipes && (
-        <div className="grid grid-cols-2 gap-11">
+        <div className="grid md:grid-cols-2 gap-11">
           {
             recipes.map(recipe=> <SingleRecipe
             key={recipe.id}
